@@ -1,0 +1,157 @@
+\documentclass{article}
+
+\usepackage{arxiv}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage[hidelinks]{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\usepackage{doi}
+\usepackage{acronym}
+\usepackage{listings}
+\usepackage{tikz}
+
+\usetikzlibrary{trees}
+
+\newacro{abm}[ABM]{Agent-Based Model}
+\newacro{cabm}[CABM]{Cellular Agent-Based Model}
+\newacro{ca}[CA]{Cellular Automaton}
+\newacroplural{ca}[CA]{Cellular Automata}
+
+\title{Rust for High-Performance Computing}
+
+%\date{September 9, 1985}	% Here you can change the date presented in the paper title
+%\date{} 					% Or removing it
+
+\author{
+    \href{https://orcid.org/0009-0001-0613-7978}{
+        \includegraphics[scale=0.06]{orcid.pdf}
+        \hspace{1mm}Jonas Pleyer
+    }
+    \thanks{
+        \href{https://jonas.pleyer.org}{jonas.pleyer.org},
+        \href{https://cellular-raza.com}{cellular-raza.com}
+    }\\
+	Freiburg Center for Data-Analysis and Modeling\\
+	University of Freiburg\\
+	\texttt{jonas.pleyer@fdm.uni-freiburg.de} \\
+	%% examples of more authors
+	\And
+	\href{https://orcid.org/0000-0002-6371-4495}{
+        \includegraphics[scale=0.06]{orcid.pdf}
+        \hspace{1mm}Christian Fleck
+    }\\
+	Freiburg Center for Data-Analysis and Modeling\\
+	University of Freiburg
+}
+
+% Uncomment to remove the date
+%\date{}
+
+% Uncomment to override  the `A preprint' in the header
+\renewcommand{\headeright}{Preprint}
+%\renewcommand{\undertitle}{Technical Report}
+\renewcommand{\shorttitle}{Rust for High-Performance Computing}
+
+\usepackage{enumitem}
+\setlist{nolistsep}
+
+%%% Add PDF metadata to help others organize their library
+%%% Once the PDF is generated, you can check the metadata with
+%%% $ pdfinfo template.pdf
+\hypersetup{
+pdftitle={Rust for High-Performance Computing},
+pdfsubject={q-bio.NC, q-bio.QM},
+pdfauthor={Jonas Pleyer, Christian Fleck},
+pdfkeywords={},
+}
+
+% Change numbering of equations
+% \numberwithin{equation}{section}
+
+% MAKE TITLES IN THEOREMS BOLD
+\makeatletter
+\def\th@plain{%
+  \thm@notefont{}% same as heading font
+  \itshape % body font
+}
+\def\th@definition{%
+  \thm@notefont{}% same as heading font
+  \normalfont % body font
+}
+\makeatother
+
+\begin{document}
+\maketitle
+
+%###################################################################################################
+\begin{abstract}
+\end{abstract}
+
+
+% keywords can be removed
+\keywords{Rust \and HPC \and High-Performance Computing \and Programming}
+
+%###################################################################################################
+\section{Introduction}
+\label{section:introduction}
+
+%###################################################################################################
+\section{Ergonomics }
+\label{section:debugging}
+
+%###################################################################################################
+\section{Ecosystem and Libraries}
+
+%---------------------------------------------------------------------------------------------------
+\subsection{Numerics}
+\label{subsection:numerics}
+
+\begin{enumerate}
+    \item ODE solvers~\cite{Renevey2024}
+    \item PDE solvers
+    \item Fluid Dynamics: Salva (2D \& 3D)~\cite{Crozet2024}
+    \item Physics Engine: Rapier (2D \& 3D)~\cite{Crozet2025}
+\end{enumerate}
+
+%---------------------------------------------------------------------------------------------------
+\subsection{Storage}
+\label{subsection:storage}
+
+\begin{enumerate}
+    \item serde ecosystem~\cite{TolnaySerde2024,TolnaySerdeJson2025}
+\end{enumerate}
+
+%---------------------------------------------------------------------------------------------------
+\subsection{Debugging}
+\label{subsection:debugging}
+
+%---------------------------------------------------------------------------------------------------
+\subsection{GPGPU Programming}
+\label{subsection:gpgpu}
+
+\begin{enumerate}
+    \item wgpu~\cite{Fitzgerald2025}
+\end{enumerate}
+
+%###################################################################################################
+\section{Examples}
+\label{section:examples}
+
+\begin{enumerate}
+    \item Physics~\cite{}
+    \item Biology~\cite{Pleyer2024}
+    \item Bioinformatics~\cite{}
+\end{enumerate}
+
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\end{document}
