@@ -2,3 +2,5 @@
 
 # Rust Scientific Computing
 This is a collection of libraries for scientific computing in the Rust programming language.
+
+Visit the [book](https://jonaspleyer.github.io/rust-scientific-computing/).
