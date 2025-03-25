@@ -1,3 +1,4 @@
 # ODE & PDE Solvers
 
-@@Robinson2025
+## diffsol
+> A library for solving ordinary differential equations (ODEs) in Rust. @@Robinson2025

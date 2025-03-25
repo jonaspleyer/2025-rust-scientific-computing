@@ -4,5 +4,5 @@
 
 ## Global Optimization
 ### Differential Evolution
-[differential-evolution](https://github.com/martinus/differential-evolution-rs)
-@@differential_evolution2016
+> Simple and powerful global optimization using a self-adapting differential evolution.
+> @@differential_evolution2016

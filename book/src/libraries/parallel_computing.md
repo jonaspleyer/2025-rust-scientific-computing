@@ -3,7 +3,7 @@
 ## Language-specific Safeguards
 
 ## MPI
-mpi @@Brown2024
+> Message Passing Interface bindings for Rust @@Brown2024
 
 ## Rayon
-rayon @@Stone2024
+> Simple work-stealing parallelism for Rust @@Stone2024
