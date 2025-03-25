@@ -1,0 +1,6 @@
+# Applications
+
+| Name | Topic | Category | Citation |
+| --- |:---:|:---:| --- |
+| [`cellular_raza`](https://cellular-raza.com/) | Cellular Agent-based Modeling from a Clean Slate | Biology | @@Pleyer2025 |
+| [`rebop`](https://github.com/Armavica/rebop) | Fast stochastic simulator for well-mixed chemical reaction networks | Chemistry/Biology | @@Andreani2025 |
