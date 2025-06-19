@@ -10,6 +10,7 @@
     - [Machine Learning](./libraries/machine_learning.md)
     - [Plotting](./libraries/plotting.md)
     - [Bindings & Interoperability](./libraries/bindings_interop.md)
+    - [Other](./libraries/other.md)
 - [Applications](./applications/index.md)
 - [Infrastructure](./infrastructure.md)
 - [Conferences](./conferences.md)
