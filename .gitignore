@@ -7,3 +7,9 @@
 *.out
 *.pdf
 *.fls
+*.bbl-SAVE-ERROR
+*.bcf
+*.bcf-SAVE-ERROR
+*.run.xml
+*.toc
+crate-info-puller/target/
