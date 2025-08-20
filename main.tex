@@ -98,6 +98,7 @@ pdfkeywords={},
 \begin{abstract}
 \end{abstract}
 
+\pagebreak
 \tableofcontents
 \pagebreak
 
@@ -111,55 +112,83 @@ pdfkeywords={},
 %###################################################################################################
 \section{Ecosystem and Libraries}
 
-%---------------------------------------------------------------------------------------------------
-\subsection{Numerics}
-\label{subsection:numerics}
-
 \begin{enumerate}
-    \item Linear Algebra (nalgebra, ...)
-    \item Tensor libraries (ndarray, ...)
+    \item Linear Algebra \& Arrays (nalgebra, ndarray, ...)
+    \item Statistics \& Data Analysis (statrs, ndarray-stats, smartcore, ...)
+    \item Symbolic \& other Math (num, rug, speciyl, symcc)
     \item ODE solvers~\cite{Renevey2024}, Diffsol
     \item PDE solvers
     \item Fluid Dynamics: Salva (2D \& 3D)~\cite{Crozet2024}
     \item Physics Engine: Rapier (2D \& 3D)~\cite{Crozet2025}
-    \item Meshing (Honeycomb)
+    \item Meshing (honeycomb)
+    \item Plotting (plotters, plotlib, gnuplot bindings, vtk-rs)
+    \item Utilities (rayon, lapack)
+    \item GPU (rust-cuda, wgpu)
+    \item Datastructures
+    \item Optimization
 \end{enumerate}
 
-%---------------------------------------------------------------------------------------------------
-\subsection{Storage}
-\label{subsection:storage}
+\subsection{Foundational Components}
+\subsubsection{Linear Algebra \& Arrays}
+(nalgebra, ndarray) (dense, sparse matrices, solvers)
 
-\begin{enumerate}
-    \item serde ecosystem~\cite{TolnaySerde2024,TolnaySerdeJson2025}
-\end{enumerate}
+\subsubsection{Numerical Methods}
+(floating point arithmetic, etc.)
 
-%---------------------------------------------------------------------------------------------------
-\subsection{Debugging}
-\label{subsection:debugging}
+\subsubsection{Statistics \& Probability}
+(statsrs, ndarray-stats, smartcore)
 
-\begin{enumerate}
-    \item Rust Result,Ok,Error,?-operator,etc.
-    \item tracing + ecosystem
-    \item logging + ecosystem
-\end{enumerate}
+\subsubsection{Symbolic \& Algebraic Computing}
+(num, rug, speciyl, symcc, enzyme)
 
-%---------------------------------------------------------------------------------------------------
-\subsection{GPU Programming}
-\label{subsection:gpu}
+\subsubsection{Datastructures}
+(graphs, etc.)
 
-\begin{enumerate}
-    \item wgpu~\cite{Fitzgerald2025}
-\end{enumerate}
+\subsection{Computational Methods}
+\subsubsection{Optimization}
+\subsubsection{Differential Equations}
+(ODEs, PDEs)
+
+\subsubsection{Physics Engines}
+(Fluid Dynamics, Manybody)
+
+\subsubsection{Numerical Integration \& Differentiation}
+(quadrature, monte-carlo, symbolic diff, enzyme)
+
+\subsubsection{(Probabilistic Algorithms)}
+
+\subsection{High-Performance \& Scalable Computing}
+\subsubsection{Parallel Computing}
+(rayon)
+
+\subsubsection{GPU \& Accelerators}
+(rust-cuda, wgpu~\cite{Fitzgerald2025})
+
+\subsubsection{Sparse \& Structured Computations}
+(large databases)
+
+\subsubsection{Debugging}
+(Rust Errors as values, tracing, logging) ecosystem
+
+\subsubsection{Storage}
+(serde, json, xml, ron, ...)
+
+\subsection{Visualization}
+\subsubsection{Plotting (2D)}
+\subsubsection{3D Rendering}
+\subsubsection{Interactive}
+(dioxus)
 
 %###################################################################################################
-\section{Examples}
-\label{section:examples}
+\section{Applications}
+\label{section:applications}
 
-\begin{enumerate}
-    \item Physics~\cite{}
-    \item Biology~\cite{Pleyer2024}
-    \item Computational Oncology~\cite{Köster2025}, Proteomics~\cite{Anechitoaie2024}
-\end{enumerate}
+\subsection{Physics \& Engineering}
+\subsection{Biology \& Chemistry}
+\cite{Pleyer2024}, Computational Oncology~\cite{Köster2025}, Proteomics~\cite{Anechitoaie2024}
+\subsection{Climate \& Earth Sciences}
+\subsection{Economics \& Finance}
+\subsection{Social Sciences}
 
 %###################################################################################################
 \section{Discussion}
