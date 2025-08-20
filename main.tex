@@ -17,6 +17,9 @@
 \usepackage{acronym}
 \usepackage{listings}
 \usepackage{tikz}
+\usepackage[backend=biber,style=ieee]{biblatex}
+
+\addbibresource{references.bib}
 
 \usetikzlibrary{trees}
 
@@ -25,7 +28,7 @@
 \newacro{ca}[CA]{Cellular Automaton}
 \newacroplural{ca}[CA]{Cellular Automata}
 
-\title{Rust for High-Performance Computing}
+\title{Rust for Scientific Computing}
 
 %\date{September 9, 1985}	% Here you can change the date presented in the paper title
 %\date{} 					% Or removing it
@@ -95,6 +98,8 @@ pdfkeywords={},
 \begin{abstract}
 \end{abstract}
 
+\tableofcontents
+\pagebreak
 
 % keywords can be removed
 \keywords{Rust \and HPC \and High-Performance Computing \and Programming}
@@ -104,10 +109,6 @@ pdfkeywords={},
 \label{section:introduction}
 
 %###################################################################################################
-\section{Ergonomics }
-\label{section:debugging}
-
-%###################################################################################################
 \section{Ecosystem and Libraries}
 
 %---------------------------------------------------------------------------------------------------
@@ -115,10 +116,13 @@ pdfkeywords={},
 \label{subsection:numerics}
 
 \begin{enumerate}
-    \item ODE solvers~\cite{Renevey2024}
+    \item Linear Algebra (nalgebra, ...)
+    \item Tensor libraries (ndarray, ...)
+    \item ODE solvers~\cite{Renevey2024}, Diffsol
     \item PDE solvers
     \item Fluid Dynamics: Salva (2D \& 3D)~\cite{Crozet2024}
     \item Physics Engine: Rapier (2D \& 3D)~\cite{Crozet2025}
+    \item Meshing (Honeycomb)
 \end{enumerate}
 
 %---------------------------------------------------------------------------------------------------
@@ -133,9 +137,15 @@ pdfkeywords={},
 \subsection{Debugging}
 \label{subsection:debugging}
 
+\begin{enumerate}
+    \item Rust Result,Ok,Error,?-operator,etc.
+    \item tracing + ecosystem
+    \item logging + ecosystem
+\end{enumerate}
+
 %---------------------------------------------------------------------------------------------------
-\subsection{GPGPU Programming}
-\label{subsection:gpgpu}
+\subsection{GPU Programming}
+\label{subsection:gpu}
 
 \begin{enumerate}
     \item wgpu~\cite{Fitzgerald2025}
@@ -148,10 +158,17 @@ pdfkeywords={},
 \begin{enumerate}
     \item Physics~\cite{}
     \item Biology~\cite{Pleyer2024}
-    \item Bioinformatics~\cite{}
+    \item Computational Oncology~\cite{Köster2025}, Proteomics~\cite{Anechitoaie2024}
 \end{enumerate}
 
-\bibliographystyle{IEEEtran}
-\bibliography{references}
+%###################################################################################################
+\section{Discussion}
+\label{section:discussion}
+
+%###################################################################################################
+\section{Conclusion}
+\label{section:conclusion}
+
+\printbibliography
 
 \end{document}
