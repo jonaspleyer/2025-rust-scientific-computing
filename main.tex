@@ -109,6 +109,91 @@ pdfkeywords={},
 \section{Introduction}
 \label{section:introduction}
 
+General Remarks about languages
+\begin{enumerate}
+    \item Programming languages allow us to express machine instructions in human-readable code.
+    \item Depend on use-case
+    \item Translate human-interpretable code into machine instructions
+    \item tradeoff between high-level view (abstraction) and performance (low level)
+    \item C++ has "zero-cost" abstractions
+\end{enumerate}
+
+Importance of programming in science
+\begin{enumerate}
+    \item New fields of study (computational physics, chemistry, biology, sociology, etc.)
+    \item Cite some groundbreaking examples which were possible due to programming in science (maybe
+          weather)
+    \item
+\end{enumerate}
+
+Judging C/C++
+\begin{enumerate}
+    \item Previous Decades: C/C++ in science
+    \item Limitations of design choices of language become evident
+    \item fragmented ecosystem; good for competition; bad for developer experience
+    \item modern features missing: package manager with package registries, build system
+    \item technical details; mutable by default, templates vs generics, backwards compatiblity
+          becomes a problem ("there is a much simpler langauge within C++ that tries to get out"),
+          macros, no clear ownership rules on a language level, dangling pointers
+    \item still many good principles (such as RAII) and design principles/concepts (cite gang of
+          four)
+\end{enumerate}
+
+The need for modern languages
+\begin{enumerate}
+    \item Java aimed to replace C due to pointers
+    \item Go also aims to replace it, go is garbage-collected; thus cannot be as well-performing as
+          C++ or C
+    \item Python, Javascript for high-level abstractions ("as glue"); no performance howerver
+\end{enumerate}
+
+Elaborate on why Rust solves many problems
+\begin{enumerate}
+    \item safety guarantees; ensures that code which we write actually performs what we set out to
+          do
+    \item no dangling pointers
+    \item zero-cost abstrations
+    \item compiled without garbage-collector
+    \item tooling: modern ecosystem; package manager, build system, package registry
+    \item strong type system which is generally considered sound
+    \item macro system gets type-checked
+    \item very good C-interop; utilize existing software
+\end{enumerate}
+
+Show that many companies are starting to adopt Rust
+\begin{enumerate}
+    \item Amazon (AWS)\\
+          AWS developed Firecracker, a microVM monitoring service powering AWS Lambda and AWS
+          Fargate.
+          Firecracker is built primarily in Rust to offer fast cold boot times and secure
+          workload isolation.
+    \item Rust-supported runtimes like AWS Lambda also allow developers to write serverless
+          functions using Rust.
+    \item Google\\
+          Fuchsia, Google's modern operating system, uses Rust extensively for system components
+          such as drivers and services to enhance security and reliability.
+    \item Google (Android)\\
+          Android integration: Rust has been adopted within the Android Open Source Project (AOSP)
+          to improve memory safety in critical system components. DEV Community Litslink
+    \item Meta (Facebook)\\
+          Mononoke, Facebook’s large-scale source control backend for Mercurial, was written in
+          Rust to improve performance and reliability in its monorepo.
+    \item Meta (Facebook)\\
+          Facebook employs Rust in developing CLI tools, distributed systems, and cron jobs.
+          Engineers write millions of lines of Rust internally.
+    \item Apple\\
+          Apple’s Cloud Traffic team and backend infrastructure have been shifting from C to Rust,
+          with new functionality being primarily built in Rust. This change was driven by
+          performance, security, and developer efficiency goals. Reddit
+    \item Microsoft\\
+          Although not part of FAANG, it’s noteworthy—Microsoft is rewriting parts of the Windows
+          kernel and system components in Rust (e.g., DWriteCore, GDI Regions), prioritizing memory
+          safety.
+    \item Azure services-like Azure IoT Edge—also incorporate Rust.
+    \item Linux Kernel\\
+          Only other supported language except from C
+\end{enumerate}
+
 \begin{figure}
     \centering
     \includegraphics[width=0.5\textwidth]{figures/stackoverflow-popular-languages.pdf}%
