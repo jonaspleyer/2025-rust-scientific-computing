@@ -15,5 +15,10 @@ clean:
 	rm -f $(TARGET).out
 	rm -f $(TARGET).pdf
 	rm -f $(TARGET).fls
+	rm -f $(TARGET).toc
+	rm -f $(TARGET).run.xml
+	rm -f $(TARGET).bbl-SAVE-ERROR
+	rm -f $(TARGET).bcf-SAVE-ERROR
+	rm -f indent.log
 
 fresh: clean all
