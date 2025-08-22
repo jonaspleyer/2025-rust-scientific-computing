@@ -2,7 +2,7 @@
 async fn main() {
     let octo = octocrab::instance();
 
-    let labels = ["published".to_string()];
+    let labels = ["Rust".to_string(), "published".to_string()];
 
     let mut page = octo
         .issues("openjournals", "joss-reviews")
