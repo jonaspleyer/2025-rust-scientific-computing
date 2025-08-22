@@ -206,22 +206,6 @@ Show that many companies are starting to adopt Rust
 %###################################################################################################
 \section{Ecosystem and Libraries}
 
-\begin{enumerate}
-    \item Linear Algebra \& Arrays (nalgebra, ndarray, ...)
-    \item Statistics \& Data Analysis (statrs, ndarray-stats, smartcore, ...)
-    \item Symbolic \& other Math (num, rug, speciyl, symcc)
-    \item ODE solvers~\cite{Renevey2024}, Diffsol
-    \item PDE solvers
-    \item Fluid Dynamics: Salva (2D \& 3D)~\cite{Crozet2024}
-    \item Physics Engine: Rapier (2D \& 3D)~\cite{Crozet2025}
-    \item Meshing (honeycomb)
-    \item Plotting (plotters, plotlib, gnuplot bindings, vtk-rs)
-    \item Utilities (rayon, lapack)
-    \item GPU (rust-cuda, wgpu)
-    \item Datastructures
-    \item Optimization
-\end{enumerate}
-
 \subsection{Foundational Components}
 \subsubsection{Linear Algebra \& Arrays}
 (nalgebra, ndarray) (dense, sparse matrices, solvers)
@@ -230,7 +214,7 @@ Show that many companies are starting to adopt Rust
 (floating point arithmetic, etc.)
 
 \subsubsection{Statistics \& Probability}
-(statsrs, ndarray-stats, smartcore)
+(statrs, ndarray-stats, smartcore)
 
 \subsubsection{Symbolic \& Algebraic Computing}
 (num, rug, speciyl, symcc, enzyme)
@@ -243,8 +227,14 @@ Show that many companies are starting to adopt Rust
 \subsubsection{Differential Equations}
 (ODEs, PDEs)
 
+ODE solvers~\cite{Renevey2024}, Diffsol
+
 \subsubsection{Physics Engines}
 (Fluid Dynamics, Manybody)
+
+salva (2D \& 3D)~\cite{Crozet2024}
+
+Rapier (2D \& 3D)~\cite{Crozet2025}
 
 \subsubsection{Numerical Integration \& Differentiation}
 (quadrature, monte-carlo, symbolic diff, enzyme)
@@ -273,7 +263,13 @@ Show that many companies are starting to adopt Rust
 
 \subsection{Visualization}
 \subsubsection{Plotting (2D)}
+plotters, plotlib, gnuplot bindings
+
 \subsubsection{3D Rendering}
+vtk-rs
+
+Meshing (honeycomb)
+
 \subsubsection{Interactive}
 (dioxus)
 
@@ -590,8 +586,8 @@ Efficient point location with ploc.
 AcoDyn\\
 Fluid dynamics on the GPU powered by Rust.
 
-RLST\\
-Linear algebra frameworks in Rust for the solution of partial differential equations.
+rlst\\
+The Rust Linear Solver toolbox is an in-development project for dense and sparse linear algebra routines in Rust.
 
 Raphtory\\
 Temporal graphs from Scala to Rust.
@@ -678,7 +674,23 @@ Sage\\
 Enables fast proteomics searching and quantification at scale.
 
 Bernstein–Bézier\\
-Finite elements for RMM in Rust. ResearchGate
+Finite elements for RMM in Rust~\cite{Sky2024}
+
+mwa\_hyperdrive\\
+Calibration software for the Murchison Widefield Array (MWA) radio telescope.
+\url{https://mwatelescope.github.io/mwa_hyperdrive/index.html}
+
+alg\_tools\\
+utility routines and tools for implementing iterative algorithms and (abstract) numerical computing in Rust~\cite{Valkonen2023}.
+\url{https://tuomov.iki.fi/software/alg_tools/}
+
+clarabel\\
+Clarabel is an interior point numerical solver for convex optimization problems using a novel
+homogeneous embedding~\cite{Clarabel_2024}.
+
+fips\\
+\cite{jeggle2023genericframeworkdataracefreemanyparticle}
+\url{https://zenodo.org/records/6757615}
 
 Roqoqo\\
 A quantum computing toolkit in Rust.
