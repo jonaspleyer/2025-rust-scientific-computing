@@ -18,11 +18,24 @@ async fn get_data(client: &AsyncClient, crate_name: &str) -> Result<CrateData> {
     })
 }
 
+#[derive(clap::Parser, Debug)]
+#[command(version, about, long_about = None)]
+struct Args {
+    /// Comma-separated list of crate names
+    #[arg(short, long, value_delimiter = ',')]
+    crates: Vec<String>,
+    // #[arg(short, long)]
+    // filename: Option<String>,
+}
+
 #[macro_rules_attribute::apply(smol_macros::main)]
 async fn main() -> Result<()> {
+    use clap::Parser;
     use reqwest::header::*;
 
-    let crates = ["nalgebra", "ndarray", "cellular_raza", "approx-derive"];
+    let args = Args::parse();
+    // let crates = ["nalgebra", "ndarray", "cellular_raza", "approx-derive"];
+    let crates = args.crates;
 
     let mut headers = HeaderMap::new();
     headers.insert(USER_AGENT, HeaderValue::from_str("gobbler")?);
@@ -35,7 +48,7 @@ async fn main() -> Result<()> {
 
     println!("\\begin{{tabular}}{{l r r}}");
     println!("    Crate Name       &Weekly Downloads   &Last Update    &Latest Version\\\\");
-    for (n, name) in crates.into_iter().enumerate() {
+    for (n, name) in crates.iter().enumerate() {
         let cd = async_compat::Compat::new(get_data(&client, name)).await?;
 
         let mut d = cd.downloads.version_downloads;
