@@ -1,8 +1,25 @@
-use anyhow::Context;
+use anyhow::{Context, Result};
+use crates_io_api_wasm_patch::{AsyncClient, CrateDownloads, CrateResponse};
 
-#[async_std::main]
-async fn main() -> anyhow::Result<()> {
-    use crates_io_api_wasm_patch::AsyncClient;
+struct CrateData {
+    crate_name: String,
+    crate_response: CrateResponse,
+    downloads: CrateDownloads,
+}
+
+async fn get_data(client: &AsyncClient, crate_name: &str) -> Result<CrateData> {
+    let cre = client.get_crate(crate_name);
+    let dow = client.crate_downloads(crate_name);
+
+    Ok(CrateData {
+        crate_name: crate_name.to_string(),
+        crate_response: cre.await?,
+        downloads: dow.await?,
+    })
+}
+
+#[macro_rules_attribute::apply(smol_macros::main)]
+async fn main() -> Result<()> {
     use reqwest::header::*;
 
     let crates = ["nalgebra", "ndarray", "cellular_raza", "approx-derive"];
@@ -18,14 +35,15 @@ async fn main() -> anyhow::Result<()> {
 
     println!("\\begin{{tabular}}{{l r r}}");
     println!("    Crate Name       &Weekly Downloads   &Last Update    &Latest Version\\\\");
-    for (n, crate_name) in crates.iter().enumerate() {
-        let cr = client.get_crate(crate_name).await?;
-        let downloads = client.crate_downloads(crate_name).await?;
-        let mut d = downloads.version_downloads;
+    for (n, name) in crates.into_iter().enumerate() {
+        let cd = async_compat::Compat::new(get_data(&client, name)).await?;
+
+        let mut d = cd.downloads.version_downloads;
         d.sort_by_key(|x| x.date);
 
-        let last_update = cr.crate_data.updated_at;
-        let latest_version = cr
+        let last_update = cd.crate_response.crate_data.updated_at;
+        let latest_version = cd
+            .crate_response
             .crate_data
             .versions
             .and_then(|v| v.into_iter().max())
@@ -43,10 +61,11 @@ async fn main() -> anyhow::Result<()> {
                 .sum::<u64>();
             w as f64 / n as f64 * 7.
         };
-        let latest_version = cr.versions[0].num.clone();
+        let latest_version = cd.crate_response.versions[0].num.clone();
 
         print!(
-            "    {crate_name:16} &{weekly_downloads:<8.0} &{:10} &{latest_version:10}",
+            "    {:16} &{weekly_downloads:<8.0} &{:10} &{latest_version:10}",
+            cd.crate_name,
             last_update.format("%d/%m/%Y")
         );
         if n + 1 < crates.len() {
