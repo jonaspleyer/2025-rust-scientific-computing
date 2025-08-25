@@ -1,6 +1,8 @@
 use anyhow::{Context, Result};
 use crates_io_api_wasm_patch::{AsyncClient, CrateDownloads, CrateResponse};
+use serde::{Deserialize, Serialize};
 
+#[derive(Clone, Deserialize, Serialize, Debug)]
 struct CrateData {
     crate_name: String,
     crate_response: CrateResponse,
@@ -9,17 +11,32 @@ struct CrateData {
 }
 
 async fn get_data(client: &AsyncClient, crate_name: &str) -> Result<CrateData> {
-    let dow = client.crate_downloads(crate_name);
-    let crate_response = client.get_crate(crate_name).await?;
-    let num = &crate_response.versions.first().unwrap().num.clone();
-    let deps = client.crate_dependencies(crate_name, num);
+    // First check if data was stored to disk
+    let mut crate_path = std::path::PathBuf::new();
+    crate_path.push("./out/");
+    crate_path.push(crate_name);
 
-    Ok(CrateData {
-        crate_name: crate_name.to_string(),
-        crate_response,
-        downloads: dow.await?,
-        deps: deps.await?.len(),
-    })
+    if crate_path.exists() {
+        let content = std::fs::read_to_string(crate_path)?;
+        let res: CrateData = ron::from_str(&content)?;
+        Ok(res)
+    } else {
+        let dow = client.crate_downloads(crate_name);
+        let crate_response = client.get_crate(crate_name).await?;
+        let num = &crate_response.versions.first().unwrap().num.clone();
+        let deps = client.crate_dependencies(crate_name, num);
+
+        let res = CrateData {
+            crate_name: crate_name.to_string(),
+            crate_response,
+            downloads: dow.await?,
+            deps: deps.await?.len(),
+        };
+        std::fs::create_dir_all(crate_path.parent().unwrap())?;
+        let contents = ron::to_string(&res)?;
+        std::fs::write(crate_path, contents)?;
+        Ok(res)
+    }
 }
 
 async fn format_crates<T: AsRef<str>>(client: &AsyncClient, crates: &[T]) -> Result<()> {
