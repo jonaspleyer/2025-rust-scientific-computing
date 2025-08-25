@@ -7,7 +7,7 @@ edition = "2024"
 anyhow = "1.0.99"
 async-compat = "0.2.5"
 chrono = { version = "0.4.41", features = ["alloc"] }
-clap = "4.5.45"
+clap = { version = "4.5.45", features = ["derive", "wrap_help"] }
 crates_io_api-wasm-patch = "0.12.1"
 easy-parallel = "3.3.1"
 futures = "0.3.31"

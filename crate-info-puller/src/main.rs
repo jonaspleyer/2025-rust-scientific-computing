@@ -18,14 +18,21 @@ async fn get_data(client: &AsyncClient, crate_name: &str) -> Result<CrateData> {
     })
 }
 
+/// Query crates.io and generate a summary table
+///
+/// The list of crates is combined in order from
+/// the explicitly given names via the --crates
+/// argument and optionally from the contents of
+/// a file given by the --file argument.
 #[derive(clap::Parser, Debug)]
-#[command(version, about, long_about = None)]
+#[command(version, about, max_term_width = 50)]
 struct Args {
     /// Comma-separated list of crate names
     #[arg(short, long, value_delimiter = ',')]
     crates: Vec<String>,
-    // #[arg(short, long)]
-    // filename: Option<String>,
+    /// Read crate names from lines in a text file
+    #[arg(short, long)]
+    file: Option<String>,
 }
 
 #[macro_rules_attribute::apply(smol_macros::main)]
@@ -34,8 +41,11 @@ async fn main() -> Result<()> {
     use reqwest::header::*;
 
     let args = Args::parse();
-    // let crates = ["nalgebra", "ndarray", "cellular_raza", "approx-derive"];
-    let crates = args.crates;
+    let mut crates = args.crates;
+    if let Some(filename) = args.file {
+        let content = std::fs::read_to_string(filename)?;
+        crates.extend(content.lines().map(String::from));
+    }
 
     let mut headers = HeaderMap::new();
     headers.insert(USER_AGENT, HeaderValue::from_str("gobbler")?);
