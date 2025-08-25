@@ -18,48 +18,11 @@ async fn get_data(client: &AsyncClient, crate_name: &str) -> Result<CrateData> {
     })
 }
 
-/// Query crates.io and generate a summary table
-///
-/// The list of crates is combined in order from
-/// the explicitly given names via the --crates
-/// argument and optionally from the contents of
-/// a file given by the --file argument.
-#[derive(clap::Parser, Debug)]
-#[command(version, about, max_term_width = 50)]
-struct Args {
-    /// Comma-separated list of crate names
-    #[arg(short, long, value_delimiter = ',')]
-    crates: Vec<String>,
-    /// Read crate names from lines in a text file
-    #[arg(short, long)]
-    file: Option<String>,
-}
-
-#[macro_rules_attribute::apply(smol_macros::main)]
-async fn main() -> Result<()> {
-    use clap::Parser;
-    use reqwest::header::*;
-
-    let args = Args::parse();
-    let mut crates = args.crates;
-    if let Some(filename) = args.file {
-        let content = std::fs::read_to_string(filename)?;
-        crates.extend(content.lines().map(String::from));
-    }
-
-    let mut headers = HeaderMap::new();
-    headers.insert(USER_AGENT, HeaderValue::from_str("gobbler")?);
-
-    let client1 = reqwest::Client::builder()
-        .default_headers(headers)
-        .build()?;
-    let client =
-        AsyncClient::with_http_client(client1.clone(), web_time::Duration::from_millis(1000));
-
+async fn format_crates<T: AsRef<str>>(client: &AsyncClient, crates: &[T]) -> Result<()> {
     println!("\\begin{{tabular}}{{l r r}}");
     println!("    Crate Name       &Weekly Downloads   &Last Update    &Latest Version\\\\");
     for (n, name) in crates.iter().enumerate() {
-        let cd = async_compat::Compat::new(get_data(&client, name)).await?;
+        let cd = async_compat::Compat::new(get_data(client, name.as_ref())).await?;
 
         let mut d = cd.downloads.version_downloads;
         d.sort_by_key(|x| x.date);
@@ -98,6 +61,46 @@ async fn main() -> Result<()> {
         }
     }
     println!("\\end{{tabular}}");
+    Ok(())
+}
+
+/// Query crates.io and generate a summary table
+///
+/// The crate names are sorted by name before any output is produced.
+#[derive(clap::Parser, Debug)]
+#[command(version, about, max_term_width = 60)]
+struct Args {
+    /// Comma-separated list of crate names
+    #[arg(short, long, value_delimiter = ',')]
+    crates: Vec<String>,
+    /// Read crate names from lines in a text file
+    #[arg(short, long)]
+    file: Option<String>,
+}
+
+#[macro_rules_attribute::apply(smol_macros::main)]
+async fn main() -> Result<()> {
+    use clap::Parser;
+    use reqwest::header::*;
+
+    let args = Args::parse();
+    let mut crates = args.crates;
+    if let Some(filename) = args.file {
+        let content = std::fs::read_to_string(filename)?;
+        crates.extend(content.lines().map(String::from));
+    }
+    crates.sort();
+
+    let mut headers = HeaderMap::new();
+    headers.insert(USER_AGENT, HeaderValue::from_str("gobbler")?);
+
+    let client1 = reqwest::Client::builder()
+        .default_headers(headers)
+        .build()?;
+    let client =
+        AsyncClient::with_http_client(client1.clone(), web_time::Duration::from_millis(1000));
+
+    format_crates(&client, &crates).await?;
 
     Ok(())
 }
