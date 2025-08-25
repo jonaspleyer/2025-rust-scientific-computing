@@ -121,8 +121,7 @@ General Remarks about languages
 Importance of programming in science
 \begin{enumerate}
     \item New fields of study (computational physics, chemistry, biology, sociology, etc.)
-    \item Cite some groundbreaking examples which were possible due to programming in science (maybe
-          weather)
+    \item Cite some groundbreaking examples which were possible due to programming in science (maybe weather)
     \item
 \end{enumerate}
 
@@ -132,25 +131,22 @@ Judging C/C++
     \item Limitations of design choices of language become evident
     \item fragmented ecosystem; good for competition; bad for developer experience
     \item modern features missing: package manager with package registries, build system
-    \item technical details; mutable by default, templates vs generics, backwards compatiblity
-          becomes a problem ("there is a much simpler langauge within C++ that tries to get out"),
-          macros, no clear ownership rules on a language level, dangling pointers
-    \item still many good principles (such as RAII) and design principles/concepts (cite gang of
-          four)
+    \item technical details; mutable by default, templates vs generics, backwards compatiblity becomes a
+          problem ("there is a much simpler langauge within C++ that tries to get out"), macros, no clear
+          ownership rules on a language level, dangling pointers
+    \item still many good principles (such as RAII) and design principles/concepts (cite gang of four)
 \end{enumerate}
 
 The need for modern languages
 \begin{enumerate}
     \item Java aimed to replace C due to pointers
-    \item Go also aims to replace it, go is garbage-collected; thus cannot be as well-performing as
-          C++ or C
+    \item Go also aims to replace it, go is garbage-collected; thus cannot be as well-performing as C++ or C
     \item Python, Javascript for high-level abstractions ("as glue"); no performance howerver
 \end{enumerate}
 
 Elaborate on why Rust solves many problems
 \begin{enumerate}
-    \item safety guarantees; ensures that code which we write actually performs what we set out to
-          do
+    \item safety guarantees; ensures that code which we write actually performs what we set out to do
     \item no dangling pointers
     \item zero-cost abstrations
     \item compiled without garbage-collector
@@ -162,36 +158,26 @@ Elaborate on why Rust solves many problems
 
 Show that many companies are starting to adopt Rust
 \begin{enumerate}
-    \item Amazon (AWS)\\
-          AWS developed Firecracker, a microVM monitoring service powering AWS Lambda and AWS
-          Fargate.
-          Firecracker is built primarily in Rust to offer fast cold boot times and secure
-          workload isolation.
-    \item Rust-supported runtimes like AWS Lambda also allow developers to write serverless
-          functions using Rust.
-    \item Google\\
-          Fuchsia, Google's modern operating system, uses Rust extensively for system components
+    \item Amazon (AWS)\\ AWS developed Firecracker, a microVM monitoring service powering AWS Lambda and AWS
+          Fargate. Firecracker is built primarily in Rust to offer fast cold boot times and secure workload
+          isolation.
+    \item Rust-supported runtimes like AWS Lambda also allow developers to write serverless functions using
+          Rust.
+    \item Google\\ Fuchsia, Google's modern operating system, uses Rust extensively for system components
           such as drivers and services to enhance security and reliability.
-    \item Google (Android)\\
-          Android integration: Rust has been adopted within the Android Open Source Project (AOSP)
-          to improve memory safety in critical system components. DEV Community Litslink
-    \item Meta (Facebook)\\
-          Mononoke, Facebook’s large-scale source control backend for Mercurial, was written in
-          Rust to improve performance and reliability in its monorepo.
-    \item Meta (Facebook)\\
-          Facebook employs Rust in developing CLI tools, distributed systems, and cron jobs.
-          Engineers write millions of lines of Rust internally.
-    \item Apple\\
-          Apple’s Cloud Traffic team and backend infrastructure have been shifting from C to Rust,
-          with new functionality being primarily built in Rust. This change was driven by
-          performance, security, and developer efficiency goals. Reddit
-    \item Microsoft\\
-          Although not part of FAANG, it’s noteworthy—Microsoft is rewriting parts of the Windows
-          kernel and system components in Rust (e.g., DWriteCore, GDI Regions), prioritizing memory
-          safety.
+    \item Google (Android)\\ Android integration: Rust has been adopted within the Android Open Source
+          Project (AOSP) to improve memory safety in critical system components. DEV Community Litslink
+    \item Meta (Facebook)\\ Mononoke, Facebook’s large-scale source control backend for Mercurial, was
+          written in Rust to improve performance and reliability in its monorepo.
+    \item Meta (Facebook)\\ Facebook employs Rust in developing CLI tools, distributed systems, and cron
+          jobs. Engineers write millions of lines of Rust internally.
+    \item Apple\\ Apple’s Cloud Traffic team and backend infrastructure have been shifting from C to Rust,
+          with new functionality being primarily built in Rust. This change was driven by performance,
+          security, and developer efficiency goals. Reddit
+    \item Microsoft\\ Although not part of FAANG, it’s noteworthy—Microsoft is rewriting parts of the Windows
+          kernel and system components in Rust (e.g., DWriteCore, GDI Regions), prioritizing memory safety.
     \item Azure services-like Azure IoT Edge—also incorporate Rust.
-    \item Linux Kernel\\
-          Only other supported language except from C
+    \item Linux Kernel\\ Only other supported language except from C
 \end{enumerate}
 
 \begin{figure}
@@ -381,6 +367,7 @@ for many Rust scientific computing libraries.
 ploc\\
 A parallelized algorithm library for localization and clustering tasks. Focuses on scalable
 implementations of clustering approaches. Intended for large datasets in scientific applications.
+\url{https://dotblocks.com/}
 
 Polars\\
 A fast DataFrame library for Rust, with APIs also available in Python. It provides
@@ -521,20 +508,39 @@ vision and photogrammetry. Helps test and benchmark 3D reconstruction algorithms
 
 \paragraph{Scientific Computing in Rust 2025 talks}
 
-Diffsol\\
-A crate for solving differential equations.
+stochastic-rs\\
+stochastic-rs is a high-performance Rust library for simulating and analyzing
+stochastic processes. Designed for applications in quantitative finance, AI training, and
+statistical modeling, it provides efficient tools to generate synthetic data and analyze complex
+stochastic systems.
 
 Pixi\\
 The missing companion to Cargo.
 
-ploc\\
-Efficient point location with ploc.
-
 NPB-Rust\\
-NAS parallel benchmarks in Rust.
+NAS parallel benchmarks in Rust. \cite{martins2025npbrustnasparallelbenchmarks}
 
 cellular\_raza\\
 Cellular agent-based modeling from a clean slate.
+
+ORMATEX\\
+Oak Ridge MATrix EXponential tools - methods to compute the matrix exponential
+
+orbweaver-rs\\
+A fast R library for working with Nodes in a graph.
+
+triple-r\\
+Recycle, Reuse, Reduce. triple-r is a high-performance Rust library that provides
+wrappers around standard library collections to enable the reuse of their memory allocations. By
+recycling the underlying memory of collections like HashMap and Vec, triple-r helps reduce
+allocation overhead in performance-critical applications.
+
+faucet (maybe remove; does this fit the scope?)\\
+Scale, deploy and route Plumber APIs and Shiny
+applications with ease and efficiency.
+
+qoqo\\
+A toolkit to represent quantum circuits by HQS Quantum Simulations.
 
 ninterp\\
 Numerical interpolation in N-dimensions.
@@ -542,52 +548,49 @@ Numerical interpolation in N-dimensions.
 Arrow\\
 Arrow, Rust, and cross-language data science tooling.
 
-Juice\\
-Juice your simulations: what science can learn from game development.
-
 eVaiutilities\\
-Research data management post eVai.
+A data management software for the analysis of the eVai output files. It allows the
+analysis of the genomic variants further such as analyzing the multiple genomic annotated variants,
+reference and alternate allele, enabling coordinate search, coordinate search with specified
+variants and annotation search across a large number of population.
 
 Honeycomb\\
 Combinatorial maps implementation for meshing applications.
 
-Stochastic\\
-Stochastic calculus in Rust.
+qhull-rs\\
+Qhull computes the convex hull, Delaunay triangulation, Voronoi diagram, halfspace
+intersection about a point, furthest-site Delaunay triangulation, and furthest-site Voronoi
+diagram.
 
-Exponential\\
-Exponential time integration for stiff systems in Rust.
+HULK (maybe out of scope?)\\
+The robot control program and associated tools of the RoboCup SPL team
+HULKs. \url{https://hulks.de/hulk/} "Rust’s safety and performance features benefit real-time
+robotics, and the challenges of integrating it into an ecosystem traditionally dominated by C++ and
+Python."
 
-Rust\\
-Rust for chip design algorithms and EDA software.
-
-Using\\
-Using Rust to mitigate breaking changes in scientific software.
-
-The\\
-The pleasure and pain of developing cross-platform CPU vector code in Rust.
-
-Deimos\\
-Open-source scientific data acquisition \& laboratory controls.
-
-Rust\\
-Rust is RAD and this is why.
+burn\\
+Burn is a next generation Deep Learning Framework that doesn't compromise on flexibility,
+efficiency and portability. \url{https://github.com/tracel-ai/burn}\\
+Commercial
 
 Diffsol\\
 A crate for solving differential equations.
 
-Pixi\\
-The missing companion to Cargo.
-
-ploc\\
-Efficient point location with ploc.
+Deimos\\
+Open-source scientific data acquisition \& laboratory controls.
 
 \paragraph{Scientific Computing in Rust 2024 talks}
+
+oxidicom\\
+A high-performance DICOM receiver for the ChRIS backend (CUBE).
+\url{https://chrisproject.org/}
 
 AcoDyn\\
 Fluid dynamics on the GPU powered by Rust.
 
 rlst\\
-The Rust Linear Solver toolbox is an in-development project for dense and sparse linear algebra routines in Rust.
+The Rust Linear Solver toolbox is an in-development project for dense and sparse linear
+algebra routines in Rust.
 
 Raphtory\\
 Temporal graphs from Scala to Rust.
@@ -595,59 +598,71 @@ Temporal graphs from Scala to Rust.
 Bless\\
 Transparently logging program outputs.
 
-sophus-rs\\
-A fast electromagnetics library with Rust and Python.
+cfsem\\
+Quasi-steady electromagnetics including filamentized approximations, Biot-Savart, and
+Grad-Shafranov.\\
+\url{https://cfs.energy/} Commercial
 
 sophus-rs\\
 A fast electromagnetics library with Rust and Python.
 
-Rootfinders\\
+Argmin\\
 Rootfinders for Rust.
 
 Rstats\\
 Multidimensional data analysis in Rust.
 
+Symbolica\\
+Symbolica is a blazing fast computer algebra system for Python and Rust, born of a need
+to push the boundaries of computations in science and enterprise.
+
 extendr\\
 Frictionless bindings for R and Rust.
 
-Rusting\\
-Rusting RSRS.
+rsrs (no crate, just github repo)\\
+An implementation of the randomised strong recursive
+skeletonisation
 
-Physics\\
-Physics simulations in Bevy.
-
-An\\
-An embedded memory cache for persistent memory access.
+bevy\\
+Bevy is a refreshingly simple data-driven game engine built in Rust.
 
 Polars\\
-Polars in the factory: when databases trump collections for modeling.
+Polars is a DataFrame library for Rust. It is based on Apache Arrow’s memory model. Apache
+Arrow provides very cache efficient columnar data structures and is becoming the defacto standard
+for columnar data.
 
 Perpetaul\\
 Perpetaul: a hyperparameter-free gradient boosting machine.
 
-Writing\\
-Writing maths software in Rust after 20 years of C++: graph isomorphism and groups.
-
-Productive\\
-Productive and reliable constitutive modeling in Rust.
-
-Efficient\\
-Efficient 1-bit matrix approximations.
-
-Developing\\
+Roxido\\
 Developing Rust-based R packages using the Roxido framework.
 
 Rusph\\
 Rusph: a SPH astrophysical simulation code in the Rust programming language.
 
-Back\\
+Biomechanics Foundation\\
 Back to basics: rebuilding computational biomechanics crate by crate.
+Many crates (maybe just cite one crate):
+\begin{itemize}
+    \item chiron - Graphical and command-line interface tools for Biomechanics Foundation
+    \item gcv\_spline - Generalized Cross-Validated Splines for Interpolation and Derivation in Pure Rust
+    \item onager - Featherstone rigid-body physics library built in Rust
+    \item c3dio - A c3d parser, writer and editor written in Rust.
+    \item bevy\_c3d - A .c3d asset loader plugin for the Bevy engine.
+    \item Mannequin - Methods for kinematics and rigging, and dynamics in biomechanics applications and
+          animation
+    \item hominem - Biomechanical muscle models for simulating human motion
+\end{itemize}
+\url{https://biomechanicsfoundation.org/}
+\url{https://github.com/biomechanics-foundation}
 
-Cargo\\
-Cargo +GPU build: An early outlook.
+\#[offload] (feature draft)\\
+New rustc feature called \#[offload], which allows running almost arbitrary Rust code on
+co-processors like a GPU, TPU, or IPU
+\url{https://github.com/rust-lang/rust/pull/145768}
 
-Writing\\
-Writing a grid library for finite and boundary element methods.
+Bempp-rs\\
+Writing a grid library for finite and boundary element methods. \cite{Witherden2015}
 
 \paragraph{Scientific Computing in Rust 2023 talks}
 
@@ -681,12 +696,12 @@ Calibration software for the Murchison Widefield Array (MWA) radio telescope.
 \url{https://mwatelescope.github.io/mwa_hyperdrive/index.html}
 
 alg\_tools\\
-utility routines and tools for implementing iterative algorithms and (abstract) numerical computing in Rust~\cite{Valkonen2023}.
-\url{https://tuomov.iki.fi/software/alg_tools/}
+utility routines and tools for implementing iterative algorithms and (abstract)
+numerical computing in Rust~\cite{Valkonen2023}. \url{https://tuomov.iki.fi/software/alg_tools/}
 
 clarabel\\
-Clarabel is an interior point numerical solver for convex optimization problems using a novel
-homogeneous embedding~\cite{Clarabel_2024}.
+Clarabel is an interior point numerical solver for convex optimization problems using a
+novel homogeneous embedding~\cite{Clarabel_2024}.
 
 fips\\
 \cite{jeggle2023genericframeworkdataracefreemanyparticle}
