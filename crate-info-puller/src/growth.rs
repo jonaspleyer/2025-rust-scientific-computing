@@ -41,8 +41,10 @@ pub async fn format_crates<T: AsRef<str>>(client: &AsyncClient, crates: &[T]) ->
         }
     }
 
+    let mut file = std::fs::File::create("./crate-lists/releases.csv")?;
     for (month, counts) in output.iter() {
-        println!("{}/{},{counts}", month.month(), month.year());
+        use std::io::Write;
+        writeln!(&mut file, "{}/{},{counts}", month.month(), month.year())?;
     }
 
     Ok(())
