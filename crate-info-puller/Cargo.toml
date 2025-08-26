@@ -7,6 +7,10 @@ edition = "2024"
 name = "tabular"
 path = "src/tabular.rs"
 
+[[bin]]
+name = "growth"
+path = "src/growth.rs"
+
 [dependencies]
 anyhow = "1.0.99"
 async-compat = "0.2.5"
