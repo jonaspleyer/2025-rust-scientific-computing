@@ -13,3 +13,4 @@
 *.run.xml
 *.toc
 crate-info-puller/target/
+Cargo.lock
