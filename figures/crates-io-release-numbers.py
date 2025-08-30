@@ -26,7 +26,7 @@ if __name__ == "__main__":
     newlabels = []
     for tick, label in zip(ticks, labels):
         split = label.get_text().split("/")
-        if split[0] == "1":
+        if split[0] == "1" and int(split[1]) % 2 == 1:
             newticks.append(tick)
             newlabels.append(split[1])
 
@@ -47,7 +47,7 @@ if __name__ == "__main__":
     ax.plot(x[1:], y_fit, color="#00599d", linestyle="--", label="Quadratic Fit")
     # ax.fill_between(x[1:], y_fit_lower, y_fit_upper, color="#00599d", alpha=0.2)
 
-    ax.set_xticks(newticks, newlabels, rotation=45)
+    ax.set_xticks(newticks, newlabels)
 
     ax.legend(
         ncol=2,
