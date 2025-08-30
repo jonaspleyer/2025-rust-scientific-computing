@@ -25,3 +25,7 @@ clean: clean_partial
 	rm -rf $(TARGET).pdf
 
 fresh: clean all
+
+zip: fresh
+	$(MAKE) clean_partial
+	zip archive.zip -r *
