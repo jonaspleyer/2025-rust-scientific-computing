@@ -15,5 +15,8 @@
 crate-info-puller/target/
 Cargo.lock
 
+# pycache
+__pycache__
+
 # Crate information puller
 crate-info-puller/out
