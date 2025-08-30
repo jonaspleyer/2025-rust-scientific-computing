@@ -7,6 +7,7 @@ all:
 
 clean:
 	rm -f $(TARGET).aux
+	rm -f $(TARGET).bcf
 	rm -f $(TARGET).bbl
 	rm -f $(TARGET).blg
 	rm -f $(TARGET).dvi
