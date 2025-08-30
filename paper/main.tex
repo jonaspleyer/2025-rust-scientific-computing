@@ -30,8 +30,8 @@
 
 \title{Rust for Scientific Computing}
 
-%\date{September 9, 1985}	% Here you can change the date presented in the paper title
-%\date{} 					% Or removing it
+%\date{September 9, 1985}    % Here you can change the date presented in the paper title
+%\date{}                     % Or removing it
 
 \author{
     \href{https://orcid.org/0009-0001-0613-7978}{
@@ -42,17 +42,17 @@
         \href{https://jonas.pleyer.org}{jonas.pleyer.org},
         \href{https://cellular-raza.com}{cellular-raza.com}
     }\\
-	Freiburg Center for Data-Analysis and Modeling\\
-	University of Freiburg\\
-	\texttt{jonas.pleyer@fdm.uni-freiburg.de} \\
-	%% examples of more authors
-	\And
-	\href{https://orcid.org/0000-0002-6371-4495}{
+    Freiburg Center for Data-Analysis and Modeling\\
+    University of Freiburg\\
+    \texttt{jonas.pleyer@fdm.uni-freiburg.de} \\
+    %% examples of more authors
+    \And
+    \href{https://orcid.org/0000-0002-6371-4495}{
         \includegraphics[scale=0.06]{orcid.pdf}
         \hspace{1mm}Christian Fleck
     }\\
-	Freiburg Center for Data-Analysis and Modeling\\
-	University of Freiburg
+    Freiburg Center for Data-Analysis and Modeling\\
+    University of Freiburg
 }
 
 % Uncomment to remove the date
@@ -70,10 +70,10 @@
 %%% Once the PDF is generated, you can check the metadata with
 %%% $ pdfinfo template.pdf
 \hypersetup{
-pdftitle={Rust for High-Performance Computing},
-pdfsubject={q-bio.NC, q-bio.QM},
-pdfauthor={Jonas Pleyer, Christian Fleck},
-pdfkeywords={},
+    pdftitle={Rust for High-Performance Computing},
+    pdfsubject={q-bio.NC, q-bio.QM},
+    pdfauthor={Jonas Pleyer, Christian Fleck},
+    pdfkeywords={},
 }
 
 % Change numbering of equations
@@ -82,12 +82,12 @@ pdfkeywords={},
 % MAKE TITLES IN THEOREMS BOLD
 \makeatletter
 \def\th@plain{%
-  \thm@notefont{}% same as heading font
-  \itshape % body font
+    \thm@notefont{}% same as heading font
+    \itshape % body font
 }
 \def\th@definition{%
-  \thm@notefont{}% same as heading font
-  \normalfont % body font
+    \thm@notefont{}% same as heading font
+    \normalfont % body font
 }
 \makeatother
 
@@ -123,7 +123,8 @@ General Remarks about languages
 Importance of programming in science
 \begin{enumerate}
     \item New fields of study (computational physics, chemistry, biology, sociology, etc.)
-    \item Cite some groundbreaking examples which were possible due to programming in science (maybe weather)
+    \item Cite some groundbreaking examples which were possible due to programming in
+        science (maybe weather)
     \item
 \end{enumerate}
 
@@ -133,22 +134,27 @@ Judging C/C++
     \item Limitations of design choices of language become evident
     \item fragmented ecosystem; good for competition; bad for developer experience
     \item modern features missing: package manager with package registries, build system
-    \item technical details; mutable by default, templates vs generics, backwards compatiblity becomes a
-          problem ("there is a much simpler langauge within C++ that tries to get out"), macros, no clear
-          ownership rules on a language level, dangling pointers
-    \item still many good principles (such as RAII) and design principles/concepts (cite gang of four)
+    \item technical details; mutable by default, templates vs generics, backwards
+        compatiblity becomes a
+        problem ("there is a much simpler langauge within C++ that tries to get out"),
+        macros, no clear
+        ownership rules on a language level, dangling pointers
+    \item still many good principles (such as RAII) and design principles/concepts (cite
+        gang of four)
 \end{enumerate}
 
 The need for modern languages
 \begin{enumerate}
     \item Java aimed to replace C due to pointers
-    \item Go also aims to replace it, go is garbage-collected; thus cannot be as well-performing as C++ or C
+    \item Go also aims to replace it, go is garbage-collected; thus cannot be as
+        well-performing as C++ or C
     \item Python, Javascript for high-level abstractions ("as glue"); no performance howerver
 \end{enumerate}
 
 Elaborate on why Rust solves many problems
 \begin{enumerate}
-    \item safety guarantees; ensures that code which we write actually performs what we set out to do
+    \item safety guarantees; ensures that code which we write actually performs what we
+        set out to do
     \item no dangling pointers
     \item zero-cost abstrations
     \item compiled without garbage-collector
@@ -160,24 +166,35 @@ Elaborate on why Rust solves many problems
 
 Show that many companies are starting to adopt Rust
 \begin{enumerate}
-    \item Amazon (AWS)\\ AWS developed Firecracker, a microVM monitoring service powering AWS Lambda and AWS
-          Fargate. Firecracker is built primarily in Rust to offer fast cold boot times and secure workload
-          isolation.
-    \item Rust-supported runtimes like AWS Lambda also allow developers to write serverless functions using
-          Rust.
-    \item Google\\ Fuchsia, Google's modern operating system, uses Rust extensively for system components
-          such as drivers and services to enhance security and reliability.
-    \item Google (Android)\\ Android integration: Rust has been adopted within the Android Open Source
-          Project (AOSP) to improve memory safety in critical system components. DEV Community Litslink
-    \item Meta (Facebook)\\ Mononoke, Facebook’s large-scale source control backend for Mercurial, was
-          written in Rust to improve performance and reliability in its monorepo.
-    \item Meta (Facebook)\\ Facebook employs Rust in developing CLI tools, distributed systems, and cron
-          jobs. Engineers write millions of lines of Rust internally.
-    \item Apple\\ Apple’s Cloud Traffic team and backend infrastructure have been shifting from C to Rust,
-          with new functionality being primarily built in Rust. This change was driven by performance,
-          security, and developer efficiency goals. Reddit
-    \item Microsoft\\ Although not part of FAANG, it’s noteworthy—Microsoft is rewriting parts of the Windows
-          kernel and system components in Rust (e.g., DWriteCore, GDI Regions), prioritizing memory safety.
+    \item Amazon (AWS)\\ AWS developed Firecracker, a microVM monitoring service powering
+        AWS Lambda and AWS
+        Fargate. Firecracker is built primarily in Rust to offer fast cold boot times and
+        secure workload
+        isolation.
+    \item Rust-supported runtimes like AWS Lambda also allow developers to write
+        serverless functions using
+        Rust.
+    \item Google\\ Fuchsia, Google's modern operating system, uses Rust extensively for
+        system components
+        such as drivers and services to enhance security and reliability.
+    \item Google (Android)\\ Android integration: Rust has been adopted within the
+        Android Open Source
+        Project (AOSP) to improve memory safety in critical system components. DEV
+        Community Litslink
+    \item Meta (Facebook)\\ Mononoke, Facebook’s large-scale source control backend for
+        Mercurial, was
+        written in Rust to improve performance and reliability in its monorepo.
+    \item Meta (Facebook)\\ Facebook employs Rust in developing CLI tools, distributed
+        systems, and cron
+        jobs. Engineers write millions of lines of Rust internally.
+    \item Apple\\ Apple’s Cloud Traffic team and backend infrastructure have been
+        shifting from C to Rust,
+        with new functionality being primarily built in Rust. This change was driven by performance,
+        security, and developer efficiency goals. Reddit
+    \item Microsoft\\ Although not part of FAANG, it’s noteworthy—Microsoft is rewriting
+        parts of the Windows
+        kernel and system components in Rust (e.g., DWriteCore, GDI Regions),
+        prioritizing memory safety.
     \item Azure services-like Azure IoT Edge—also incorporate Rust.
     \item Linux Kernel\\ Only other supported language except from C
 \end{enumerate}
@@ -664,12 +681,14 @@ Back to basics: rebuilding computational biomechanics crate by crate.
 Many crates (maybe just cite one crate):
 \begin{itemize}
     \item chiron - Graphical and command-line interface tools for Biomechanics Foundation
-    \item gcv\_spline - Generalized Cross-Validated Splines for Interpolation and Derivation in Pure Rust
+    \item gcv\_spline - Generalized Cross-Validated Splines for Interpolation and
+        Derivation in Pure Rust
     \item onager - Featherstone rigid-body physics library built in Rust
     \item c3dio - A c3d parser, writer and editor written in Rust.
     \item bevy\_c3d - A .c3d asset loader plugin for the Bevy engine.
-    \item Mannequin - Methods for kinematics and rigging, and dynamics in biomechanics applications and
-          animation
+    \item Mannequin - Methods for kinematics and rigging, and dynamics in biomechanics
+        applications and
+        animation
     \item hominem - Biomechanical muscle models for simulating human motion
 \end{itemize}
 \url{https://biomechanicsfoundation.org/}
