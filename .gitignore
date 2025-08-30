@@ -14,3 +14,6 @@
 *.toc
 crate-info-puller/target/
 Cargo.lock
+
+# Crate information puller
+crate-info-puller/out
