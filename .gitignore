@@ -13,12 +13,14 @@
 *.bcf-SAVE-ERROR
 *.run.xml
 *.toc
-crate-info-puller/target/
 archive.zip
+
+# crates
 Cargo.lock
 
 # pycache
 __pycache__
 
 # Crate information puller
+crate-info-puller/target/
 crate-info-puller/out
