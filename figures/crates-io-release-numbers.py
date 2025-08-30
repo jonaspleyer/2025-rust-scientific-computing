@@ -56,6 +56,6 @@ if __name__ == "__main__":
         bbox_to_anchor=(0.5, 1.15),
     )
 
-    fig.savefig("figures/crates-io-release-numbers.png")
-    fig.savefig("figures/crates-io-release-numbers.pdf")
-    fig.savefig("figures/crates-io-release-numbers.svg")
+    fig.savefig("paper/figures/crates-io-release-numbers.png")
+    fig.savefig("paper/figures/crates-io-release-numbers.pdf")
+    fig.savefig("paper/figures/crates-io-release-numbers.svg")

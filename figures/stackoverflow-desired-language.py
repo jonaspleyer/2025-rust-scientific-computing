@@ -58,10 +58,10 @@ for n, ax in enumerate([ax1, ax2]):
         bbox_to_anchor=(1.17, 0.5),
     )
 
-fig1.savefig("figures/stackoverflow-loved-language.png")
-fig1.savefig("figures/stackoverflow-loved-language.pdf")
-fig1.savefig("figures/stackoverflow-loved-language.svg")
+fig1.savefig("paper/figures/stackoverflow-loved-language.png")
+fig1.savefig("paper/figures/stackoverflow-loved-language.pdf")
+fig1.savefig("paper/figures/stackoverflow-loved-language.svg")
 
-fig2.savefig("figures/stackoverflow-desired-language.png")
-fig2.savefig("figures/stackoverflow-desired-language.pdf")
-fig2.savefig("figures/stackoverflow-desired-language.svg")
+fig2.savefig("paper/figures/stackoverflow-desired-language.png")
+fig2.savefig("paper/figures/stackoverflow-desired-language.pdf")
+fig2.savefig("paper/figures/stackoverflow-desired-language.svg")

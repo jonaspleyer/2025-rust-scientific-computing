@@ -57,6 +57,6 @@ ax.legend(
 # ax.set_title("Language Popularity (stackoverflow.co)")
 ax.set_xlabel("(A) Language Usage [%]")
 
-fig.savefig("figures/stackoverflow-popular-languages.png")
-fig.savefig("figures/stackoverflow-popular-languages.pdf")
-fig.savefig("figures/stackoverflow-popular-languages.svg")
+fig.savefig("paper/figures/stackoverflow-popular-languages.png")
+fig.savefig("paper/figures/stackoverflow-popular-languages.pdf")
+fig.savefig("paper/figures/stackoverflow-popular-languages.svg")

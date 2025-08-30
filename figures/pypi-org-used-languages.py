@@ -48,6 +48,6 @@ ax.barh(
 ax.set_xlabel("(B) Number of Packages")
 ax.set_title("Packages at pypi.org")
 
-fig.savefig("figures/pypi-org-used-languages.png")
-fig.savefig("figures/pypi-org-used-languages.pdf")
-fig.savefig("figures/pypi-org-used-languages.svg")
+fig.savefig("paper/figures/pypi-org-used-languages.png")
+fig.savefig("paper/figures/pypi-org-used-languages.pdf")
+fig.savefig("paper/figures/pypi-org-used-languages.svg")
