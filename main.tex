@@ -182,19 +182,39 @@ Show that many companies are starting to adopt Rust
     \item Linux Kernel\\ Only other supported language except from C
 \end{enumerate}
 
-\begin{figure}
+\begin{figure*}
     \centering
     \includegraphics[width=0.5\textwidth]{figures/stackoverflow-popular-languages.pdf}%
     \includegraphics[width=0.5\textwidth]{figures/pypi-org-used-languages.pdf}
+    \caption{
+        Usage of programming languages according to (A) stackoverflow.com and (B) pypi.org.
+    }
+\end{figure*}
+\begin{figure*}
+    \centering
     \includegraphics[width=0.5\textwidth]{figures/stackoverflow-loved-language.pdf}%
     \includegraphics[width=0.5\textwidth]{figures/stackoverflow-desired-language.pdf}
-    \caption{TODO}
-\end{figure}
+    \caption{
+        Popularity of the Rust programming language.
+    }
+\end{figure*}
+\begin{figure*}
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/crates-io-release-numbers.pdf}
+    \caption{
+        Number of releases of all included crates.
+        Measure of overall growth of the field.
+    }
+\end{figure*}
 
 %###################################################################################################
 \section{Ecosystem and Libraries}
 
 \subsection{Foundational Components}
+Definition:\\
+Lowest level of library considered in this review. Other crates depend on these
+foundational crates.
+
 \subsubsection{Linear Algebra \& Arrays}
 (nalgebra, ndarray) (dense, sparse matrices, solvers)
 
@@ -211,6 +231,10 @@ Show that many companies are starting to adopt Rust
 (graphs, etc.)
 
 \subsection{Computational Methods}
+Definition:\\
+They are typically built on top of Foundational Components. Can also generalize over
+many of these (such as different linear algebra crates).
+
 \subsubsection{Optimization}
 \subsubsection{Differential Equations}
 (ODEs, PDEs)
@@ -230,6 +254,10 @@ Rapier (2D \& 3D)~\cite{Crozet2025}
 \subsubsection{(Probabilistic Algorithms)}
 
 \subsection{High-Performance \& Scalable Computing}
+Definition:\\
+Frameworks/libraries that allow greater scalability or usage of additional resources
+such as GPUs/TPUs etc.
+
 \subsubsection{Parallel Computing}
 (rayon, compare to openmp, MPI bindings)
 
@@ -240,6 +268,9 @@ Rapier (2D \& 3D)~\cite{Crozet2025}
 (large databases)
 
 \subsection{Creature Comforts}
+Definition:\\
+Everything that is still missing
+
 \subsubsection{Debugging}
 (Rust Errors as values, tracing, logging) ecosystem
 
@@ -250,13 +281,17 @@ Rapier (2D \& 3D)~\cite{Crozet2025}
 (pyo3, maturin, C, cxxbridge, cmake)
 
 \subsection{Visualization}
+Definition:\\
+Libraries which can be used to visualize results. (self-explanatory)
+
 \subsubsection{Plotting (2D)}
 plotters, plotlib, gnuplot bindings
 
 \subsubsection{3D Rendering}
 vtk-rs
 
-Meshing (honeycomb)
+Meshing (honeycomb) (maybe this should be in section "Computational Methods" / "Differential
+Equations")
 
 \subsubsection{Interactive}
 (dioxus)
@@ -275,6 +310,10 @@ Meshing (honeycomb)
 %###################################################################################################
 \section{Discussion}
 \label{section:discussion}
+
+\begin{itemize}
+    \item Job Opportunities remain a problem in Rust
+\end{itemize}
 
 %###################################################################################################
 \section{Conclusion}
@@ -527,7 +566,7 @@ faucet (maybe remove; does this fit the scope?)\\
 Scale, deploy and route Plumber APIs and Shiny
 applications with ease and efficiency.
 
-qoqo\\
+qoqo (Roqoqo)\\
 A toolkit to represent quantum circuits by HQS Quantum Simulations.
 
 ninterp\\
@@ -546,9 +585,9 @@ Honeycomb\\
 Combinatorial maps implementation for meshing applications.
 
 qhull-rs\\
-Qhull computes the convex hull, Delaunay triangulation, Voronoi diagram, halfspace
-intersection about a point, furthest-site Delaunay triangulation, and furthest-site Voronoi
-diagram.
+Safe Rust Qhull bindings. Qhull computes the convex hull, Delaunay triangulation,
+Voronoi diagram, halfspace intersection about a point, furthest-site Delaunay triangulation, and
+furthest-site Voronoi diagram.
 
 HULK (maybe out of scope?)\\
 The robot control program and associated tools of the RoboCup SPL team
@@ -571,8 +610,8 @@ Open-source scientific data acquisition \& laboratory controls.
 
 oxidicom\\
 A high-performance DICOM receiver for the ChRIS backend (CUBE).
-\url{https://chrisproject.org/}
-ChRIS is an open-source platform for computational research and medicine.
+\url{https://chrisproject.org/} ChRIS is an open-source platform for computational research and
+medicine.
 
 AcoDyn\\
 Fluid dynamics on the GPU powered by Rust.
@@ -613,9 +652,9 @@ Polars\\
 Polars is a DataFrame library for Rust. It is based on Apache Arrow’s memory model. Apache
 Arrow provides very cache efficient columnar data structures and is becoming the defacto standard
 for columnar data.\\
-A fast DataFrame library for Rust, with APIs also available in Python. It provides
-powerful data manipulation, joins, and group-by operations with performance close to Apache Arrow.
-Designed for data science, analytics, and scientific workflows.
+A fast DataFrame library for Rust, with APIs also available in Python. It
+provides powerful data manipulation, joins, and group-by operations with performance close to
+Apache Arrow. Designed for data science, analytics, and scientific workflows.
 
 Perpetaul\\
 Perpetaul: a hyperparameter-free gradient boosting machine.
@@ -680,9 +719,6 @@ novel homogeneous embedding~\cite{Clarabel_2024}.
 fips\\
 \cite{jeggle2023genericframeworkdataracefreemanyparticle}
 \url{https://zenodo.org/records/6757615}
-
-Roqoqo\\
-A quantum computing toolkit in Rust.
 
 Lace\\
 Bayesian tabular data analysis for Rust (and Python).
