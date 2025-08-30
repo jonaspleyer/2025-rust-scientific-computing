@@ -1,3 +1,4 @@
+# LaTeX stuff
 *.aux
 *.bbl
 *.blg
@@ -13,6 +14,7 @@
 *.run.xml
 *.toc
 crate-info-puller/target/
+archive.zip
 Cargo.lock
 
 # pycache
