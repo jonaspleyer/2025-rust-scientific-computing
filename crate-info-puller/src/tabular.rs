@@ -1,4 +1,4 @@
-use anyhow::{Context, Result};
+use anyhow::Result;
 use crates_io_api_wasm_patch::AsyncClient;
 
 use crate_info_puller::*;
@@ -12,9 +12,6 @@ pub async fn format_crates<T: AsRef<str>>(client: &AsyncClient, crates: &[T]) ->
     println!("    \\midrule");
     for (n, name) in crates.iter().enumerate() {
         let cd = async_compat::Compat::new(get_data(client, name.as_ref())).await?;
-
-        let mut d = cd.downloads.version_downloads;
-        d.sort_by_key(|x| x.date);
 
         let last_update = cd.crate_response.crate_data.updated_at;
 
@@ -47,7 +44,9 @@ pub async fn format_crates<T: AsRef<str>>(client: &AsyncClient, crates: &[T]) ->
 
         let weekly_downloads = {
             let mut n = 0;
-            let w = d
+            let w = cd
+                .downloads
+                .version_downloads
                 .into_iter()
                 .filter(|x| x.version == latest_version_id)
                 .map(|di| {
