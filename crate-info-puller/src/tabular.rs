@@ -4,8 +4,12 @@ use crates_io_api_wasm_patch::AsyncClient;
 use crate_info_puller::*;
 
 pub async fn format_crates<T: AsRef<str>>(client: &AsyncClient, crates: &[T]) -> Result<()> {
-    println!("\\begin{{tabular}}{{l r r}}");
-    println!("    Crate Name &Weekly Downloads &Last Update &Latest Version &Dependencies\\\\");
+    println!("\\begin{{tabular}}{{l r r r r r r}}");
+    println!("    \\toprule");
+    println!(
+        "    Crate Name &Last Update &Version &$N_d$ &$D_\\text{{week}}$ &$D_\\text{{total}}$\\\\"
+    );
+    println!("    \\midrule");
     for (n, name) in crates.iter().enumerate() {
         let cd = async_compat::Compat::new(get_data(client, name.as_ref())).await?;
 
@@ -53,13 +57,18 @@ pub async fn format_crates<T: AsRef<str>>(client: &AsyncClient, crates: &[T]) ->
                 .sum::<u64>();
             w as f64 / n as f64 * 7.
         };
-        let latest_version = cd.crate_response.versions[0].num.clone();
+        let total_downloads = cd.crate_response.crate_data.downloads;
         let n_deps = cd.deps;
 
+        let tot = format!("{:>7.1}k", total_downloads as f64 / 1_000.);
         print!(
-            "    {:16} &{weekly_downloads:<8.0} &{:10} &{latest_version:10} &{n_deps}",
+            "    {:16} &{:10} &{:10} &{:<4.0} &{:<8.0} &{:<8}",
             cd.crate_name,
-            last_update.format("%d-%m-%Y")
+            last_update.format("%Y-%m-%d"),
+            latest_version.num,
+            n_deps,
+            weekly_downloads,
+            tot,
         );
         if n + 1 < crates.len() {
             println!("\\\\");
@@ -67,6 +76,7 @@ pub async fn format_crates<T: AsRef<str>>(client: &AsyncClient, crates: &[T]) ->
             println!();
         }
     }
+    println!("    \\bottomrule");
     println!("\\end{{tabular}}");
     Ok(())
 }
