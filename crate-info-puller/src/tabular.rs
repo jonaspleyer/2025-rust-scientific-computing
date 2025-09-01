@@ -10,7 +10,7 @@ pub async fn format_crates<T: AsRef<str>>(client: &AsyncClient, crates: &[T]) ->
         "    Crate Name &Last Update &Version &$N_d$ &$D_\\text{{week}}$ &$D_\\text{{total}}$\\\\"
     );
     println!("    \\midrule");
-    for (n, name) in crates.iter().enumerate() {
+    for name in crates.iter() {
         let cd = async_compat::Compat::new(get_data(client, name.as_ref())).await?;
 
         let last_update = cd.crate_response.crate_data.updated_at;
@@ -60,20 +60,19 @@ pub async fn format_crates<T: AsRef<str>>(client: &AsyncClient, crates: &[T]) ->
         let n_deps = cd.deps;
 
         let tot = format!("{:>7.1}k", total_downloads as f64 / 1_000.);
-        print!(
-            "    {:16} &{:10} &{:10} &{:<4.0} &{:<8.0} &{:<8}",
-            cd.crate_name,
+        println!(
+            "    {:16} &{:10} &{:10} &{:<4.0} &{:<8} &{:>10}\\\\",
+            cd.crate_name.replace("_", "\\_"),
             last_update.format("%Y-%m-%d"),
             latest_version.num,
             n_deps,
-            weekly_downloads,
+            if weekly_downloads.is_nan() {
+                String::new()
+            } else {
+                format!("{weekly_downloads:<8.0}")
+            },
             tot,
         );
-        if n + 1 < crates.len() {
-            println!("\\\\");
-        } else {
-            println!();
-        }
     }
     println!("    \\bottomrule");
     println!("\\end{{tabular}}");
