@@ -13,18 +13,39 @@ pub async fn format_crates<T: AsRef<str>>(client: &AsyncClient, crates: &[T]) ->
         d.sort_by_key(|x| x.date);
 
         let last_update = cd.crate_response.crate_data.updated_at;
-        let latest_version = cd
+
+        let (_, &latest_version_id, latest_version) = cd
             .crate_response
             .crate_data
             .versions
-            .and_then(|v| v.into_iter().max())
-            .context("no version provided by crates.io")?;
+            .iter()
+            .flatten()
+            .zip(cd.crate_response.versions.iter())
+            .filter_map(|(id, version)| {
+                if !version.yanked
+                    && !version.num.contains("dev")
+                    && !version.num.contains("alpha")
+                    && !version.num.contains("rc")
+                {
+                    semver::Version::parse(&version.num)
+                        .ok()
+                        .map(|x| (x, id, version))
+                } else {
+                    None
+                }
+            })
+            .max_by_key(|(smvr, _, _)| smvr.clone())
+            .unwrap_or((
+                semver::Version::parse(&cd.crate_response.versions[0].num)?,
+                &cd.crate_response.crate_data.versions.as_ref().unwrap()[0],
+                &cd.crate_response.versions[0],
+            ));
 
         let weekly_downloads = {
             let mut n = 0;
             let w = d
                 .into_iter()
-                .filter(|x| x.version == latest_version)
+                .filter(|x| x.version == latest_version_id)
                 .map(|di| {
                     n += 1;
                     di.downloads
