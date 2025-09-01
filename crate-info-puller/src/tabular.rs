@@ -4,7 +4,7 @@ use crates_io_api_wasm_patch::AsyncClient;
 use crate_info_puller::*;
 
 pub async fn format_crates<T: AsRef<str>>(client: &AsyncClient, crates: &[T]) -> Result<()> {
-    println!("\\begin{{tabular}}{{l r r r r r r}}");
+    println!("\\begin{{tabular}}{{l r r r r r}}");
     println!("    \\toprule");
     println!(
         "    Crate Name &Last Update &Version &$N_d$ &$D_\\text{{week}}$ &$D_\\text{{total}}$\\\\"
