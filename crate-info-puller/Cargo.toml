@@ -22,6 +22,7 @@ itertools = "0.14.0"
 macro_rules_attribute = "0.2.2"
 reqwest = "0.12.23"
 ron = "0.10.1"
+semver = "1.0.26"
 serde = { version = "1.0.219", features = ["derive"] }
 smol = "2.0.2"
 smol-macros = "0.1.1"
