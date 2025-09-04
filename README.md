@@ -7,4 +7,4 @@
 This mini-review should serve as a snapshot of of the current state of the Rust ecosystem with
 emphasis on scientific computing.
 
-Visit the [book](https://jonaspleyer.github.io/rust-scientific-computing/).
+Visit the [book](https://jonaspleyer.github.io/2025-rust-scientific-computing/).
