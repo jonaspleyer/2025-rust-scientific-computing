@@ -1,0 +1,13 @@
+[book]
+authors = ["Jonas Pleyer"]
+language = "en"
+multilingual = false
+src = "src"
+title = "Scientific Computing in Rust"
+
+[preprocessor.bib]
+bibliography = "literature.bib"
+# This file needs to be truncated such that no newline is in the end of the file.
+# Otherwise it will look wrong in tables.
+cite-hb-tpl = "render/cite_key.hbs"
+hb-tpl = "render/refs_default.hbs"
