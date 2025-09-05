@@ -28,7 +28,7 @@ itertools = "0.14.0"
 kdam = { version = "0.6.3", features = ["template"] }
 macro_rules_attribute = "0.2.2"
 reqwest = "0.12.23"
-ron = "0.10.1"
+ron = "0.11.0"
 semver = "1.0.26"
 serde = { version = "1.0.219", features = ["derive"] }
 smol = "2.0.2"
