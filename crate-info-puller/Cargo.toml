@@ -11,14 +11,21 @@ path = "src/tabular.rs"
 name = "growth"
 path = "src/growth.rs"
 
+[[bin]]
+name = "deplist"
+path = "src/deplist.rs"
+
 [dependencies]
 anyhow = "1.0.99"
 async-compat = "0.2.5"
 chrono = { version = "0.4.41", features = ["alloc"] }
 clap = { version = "4.5.45", features = ["derive", "wrap_help"] }
 crates_io_api-wasm-patch = "0.12.1"
+db-dump = "0.7.13"
+flate2 = "1.1.2"
 futures = "0.3.31"
 itertools = "0.14.0"
+kdam = { version = "0.6.3", features = ["template"] }
 macro_rules_attribute = "0.2.2"
 reqwest = "0.12.23"
 ron = "0.10.1"
@@ -26,4 +33,5 @@ semver = "1.0.26"
 serde = { version = "1.0.219", features = ["derive"] }
 smol = "2.0.2"
 smol-macros = "0.1.1"
+tar = "0.4.44"
 web-time = "1.1.0"
