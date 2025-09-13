@@ -98,57 +98,30 @@
 \twocolumn
 \pagebreak
 
+\printinunitsof{in}\prntlen{\columnwidth}
+
 % keywords can be removed
-\keywords{Rust \and HPC \and High-Performance Computing \and Programming}
+\keywords{Rust \and HPC \and Scientific Computing \and Programming}
 
 %###################################################################################################
 \section{Introduction}
-\label{section:introduction}
 
-\begin{table*}
-    \centering
-    \begin{tabular}{l r r r r r}
-        \toprule
-        Crate Name &Last Update &Version &$N_d$ &$D_\text{week}$ &$D_\text{total}$\\
-        \midrule
-        Lamellar         &2025-03-31 &0.7.1      &42   &20       &     16.9k\\
-        argmin           &2024-02-27 &0.10.0     &18   &12003    &   1227.7k\\
-        arrow            &2025-08-25 &56.1.0     &23   &7532     &  27425.0k\\
-        bevy             &2025-05-30 &0.16.1     &35   &10175    &   2847.7k\\
-        bless            &2025-07-20 &0.1.1      &13   &80       &      0.6k\\
-        burn             &2025-07-18 &0.18.0     &12   &1793     &    319.7k\\
-        c3dio            &2024-04-08 &0.8.0      &2    &24       &     11.8k\\
-        cargo-upgrades   &2025-08-25 &2.2.4      &10   &553      &     64.7k\\
-        cellular\_raza   &2025-08-05 &0.3.0      &10   &157      &     27.4k\\
-        cfsem            &2025-08-14 &2.5.0      &8    &106      &      4.9k\\
-        city2ba          &2020-02-28 &1.1.0      &20   &19       &      3.0k\\
-        cmake            &2025-02-10 &0.1.54     &1    &899615   &  91211.9k\\
-        cudarc           &2025-08-07 &0.17.2     &5    &1184     &    647.0k\\
-        cxxbridge        &2019-12-28 &0.0.0      &0    &14       &      1.3k\\
-        deimos           &2025-06-23 &0.10.0     &13   &40       &      7.1k\\
-        diffsol          &2025-07-16 &0.6.6      &16   &131      &     33.9k\\
-        dioxus           &2025-08-11 &0.6.3      &28   &         &    637.5k\\
-        egobox           &2025-08-22 &0.32.0     &18   &250      &     35.6k\\
-        enzyme           &2021-12-26 &0.4.0      &5    &17       &      5.4k\\
-        extendr-api      &2025-07-12 &0.8.1      &11   &968      &    178.4k\\
-        factrs           &2025-01-13 &0.2.0      &20   &24       &      1.8k\\
-        faer             &2025-04-29 &0.22.6     &46   &1322     &    528.4k\\
-        faucet           &2025-05-31 &0.2.0      &7    &33       &      3.0k\\
-        fem\_2D          &2023-04-20 &0.2.2      &6    &20       &      5.4k\\
-        gcv\_spline      &2024-01-28 &0.2.0      &1    &16       &      2.5k\\
-        \bottomrule
-    \end{tabular}
-    \caption{TODO}
-\end{table*}
+% General Remarks about languages
+% \begin{enumerate}
+%     \item Programming languages allow us to express machine instructions in human-readable code.
+%     \item Depend on use-case
+%     \item Translate human-interpretable code into machine instructions
+%     \item tradeoff between high-level view (abstraction) and performance (low level)
+%     \item C++ has "zero-cost" abstractions
+% \end{enumerate}
 
-General Remarks about languages
-\begin{enumerate}
-    \item Programming languages allow us to express machine instructions in human-readable code.
-    \item Depend on use-case
-    \item Translate human-interpretable code into machine instructions
-    \item tradeoff between high-level view (abstraction) and performance (low level)
-    \item C++ has "zero-cost" abstractions
-\end{enumerate}
+Programming languages sit at the heart of all things computation.
+They allow users to express higher-level instructions in a human-readable fashion such that this
+code can be translated into machine-level instructions by either compiling or interpreting it.
+Various classes of programming languages have emerged that serve distinct purposes.
+Fundamentally, they aim to descibe problems at various levels of depth which allows humans to
+interpret and reason about the executed instructions and therefore express their desired actions
+more clearly.
 
 Importance of programming in science
 \begin{enumerate}
@@ -157,6 +130,28 @@ Importance of programming in science
         science (maybe weather)
     \item
 \end{enumerate}
+
+Many languages have been devised to target specific realms which have emerged over the past decades.
+They span across a range of abstraction levels, ranging from low-level languages to high-level ones.
+The low-level operations level mostly deals with instructions on a level close to the actual
+hardware such as memory allocation, pointer arithmetic or by using assembly instructions directly.
+Meanwhile, high-level operations usually combine many lower-level ones to perform a single task.
+An example for a high-level operation would be the addition of two matrices which might allocate the
+required memory, fill it according to the given values and then call the appropriate math function
+to pairwise add their entries.
+Languages which can operate effectively on a lower level often bear the most promise for maximum
+performance which is crucial in any scientific application.
+These languages are mostly compiled using an optimizing compiler which enables many of their
+performance achievements.
+
+This mini-review concerns itself with the Rust programming language and aims to provide an overview
+of the field of scientific computing with the Rust ecosystem.
+Other systems programming languages  such as C, C++ or Fortran have dominated the field over the
+past decades.
+Most notably, C++ has been influential in establishing a model of "zero cost abstractions" where a
+phrasing of the problem from a higher point of view does not involve any additional execution cost
+but is handled by the compiler.
+These and many other principles have allowed for a plethora of 
 
 Judging C/C++
 \begin{enumerate}
