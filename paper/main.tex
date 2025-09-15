@@ -124,25 +124,40 @@ Fundamentally, they aim to descibe problems at various levels of depth which all
 interpret and reason about the executed instructions and therefore express their desired actions
 more clearly.
 
-Importance of programming in science
-\begin{enumerate}
-    \item New fields of study (computational physics, chemistry, biology, sociology, etc.)
-    \item Cite some groundbreaking examples which were possible due to programming in
-        science (maybe weather)
-    \item
-\end{enumerate}
+Many languages are able to solve many different problems in a general-purpose fashion but some have
+also been developed to target specific realms which have emerged over the past decades.
+Early achievements of the first commercially available programming language FORTRAN are still used
+today in the Modular Ocean Model~\cite{Adcroft2019,Griffies2012}.
+The development of the C programming language in 1972 enabled milestones such as the Unix operating
+system~ \cite{Ritchie1978} which layed the foundation for many major scientific achievements.
+With the advent of C++ in 1985 further contributions were made such as the root project which
+is a "Object Oriented Data-Analysis Framework"~\cite{Brun1997} used by the CERN
+project~\cite{https://doi.org/10.7483/opendata.atlas.l806.5cku}.
+In more recent years  deep learning tools such as pytorch~\cite{Ansel_PyTorch_2_Faster_2024},
+tensorflow~\cite{tensorflow2015-whitepaper} have seen widespread use which are programmed on a
+higher abstraction level using Python.
+The latter enabled the development of AlphaFold which is provides AI-based protein structure
+prediction~\cite{Jumper2021}.
 
-Many languages have been devised to target specific realms which have emerged over the past decades.
-They span across a range of abstraction levels, ranging from low-level languages to high-level ones.
-The low-level operations level mostly deals with instructions on a level close to the actual
-hardware such as memory allocation, pointer arithmetic or by using assembly instructions directly.
+% Importance of programming in science
+% \begin{enumerate}
+%     \item New fields of study (computational physics, chemistry, biology, sociology, etc.)
+%     \item Cite some groundbreaking examples which were possible due to programming in
+%         science (maybe weather)
+%     \item
+% \end{enumerate}
+
+As the preceding exmamples show, even a single programming language can span across multiple
+abstraction levels, ranging from low-levels of operation to high-level ones.
+The former mostly deal with instructions on a level close to the actual hardware such as memory
+allocation, pointer arithmetic or by using assembly instructions directly.
 Meanwhile, high-level operations usually combine many lower-level ones to perform a single task.
 An example for a high-level operation would be the addition of two matrices which might allocate the
 required memory, fill it according to the given values and then call the appropriate math function
 to pairwise add their entries.
 Languages which can operate effectively on a lower level often bear the most promise for maximum
 performance which is crucial in any scientific application.
-These languages are mostly compiled using an optimizing compiler which enables many of their
+Of these languages almost all are compiled using an optimizing compiler which enables many of their
 performance achievements.
 
 This mini-review concerns itself with the Rust programming language and aims to provide an overview
@@ -152,7 +167,7 @@ past decades.
 Most notably, C++ has been influential in establishing a model of "zero cost abstractions" where a
 phrasing of the problem from a higher point of view does not involve any additional execution cost
 but is handled by the compiler.
-These and many other principles have allowed for a plethora of 
+These and many other principles have allowed for a plethora of
 
 Judging C/C++
 \begin{enumerate}
