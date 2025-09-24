@@ -2,6 +2,7 @@
 
 \usepackage{arxiv}
 
+\usepackage{acronym}
 \usepackage[utf8]{inputenc} % allow utf-8 input
 \usepackage[T1]{fontenc}    % use 8-bit T1 fonts
 \usepackage[hidelinks]{hyperref}       % hyperlinks
@@ -11,17 +12,24 @@
 \usepackage{amsfonts}       % blackboard math symbols
 \usepackage{layouts}
 \usepackage{microtype}      % microtypography
+\usepackage{makecell}
 \usepackage{mathrsfs}
 \usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{pagecolor}
 \usepackage{graphicx}
 \usepackage{doi}
 \usepackage{listings}
 \usepackage{tikz}
+\usepackage{tabularx}
 \usepackage[backend=biber,style=ieee]{biblatex}
+\usepackage[table]{xcolor}
 
 \addbibresource{references.bib}
 
 \usetikzlibrary{trees}
+
+\newacro{raii}[RAII]{Resource Acquisition is Initialization}
+\newacro{ode}[ODE]{Ordinary Differential Equation}
 
 \title{Rust for Scientific Computing}
 
@@ -96,13 +104,11 @@
 \pagebreak
 \tableofcontents
 
-\twocolumn
+% \twocolumn
 \pagebreak
 
-\printinunitsof{in}\prntlen{\columnwidth}
-
 % keywords can be removed
-\keywords{Rust \and HPC \and Scientific Computing \and Programming}
+\keywords{Rust \and Scientific Computing \and High-Performance Computing \and Programming}
 
 %###################################################################################################
 \section{Introduction}
@@ -120,24 +126,26 @@ Programming languages sit at the heart of all things computation.
 They allow users to express higher-level instructions in a human-readable fashion such that this
 code can be translated into machine-level instructions by either compiling or interpreting it.
 Various classes of programming languages have emerged that serve distinct purposes.
-Fundamentally, they aim to descibe problems at various levels of depth which allows humans to
+Fundamentally, they aim to descibe problems from different perspectives which allows humans to
 interpret and reason about the executed instructions and therefore express their desired actions
 more clearly.
 
-Many languages are able to solve many different problems in a general-purpose fashion but some have
-also been developed to target specific realms which have emerged over the past decades.
-Early achievements of the first commercially available programming language FORTRAN are still used
+Languages such as C, C++ or Fortran have dominated the field of compiled languages over the past
+decades.
+These languages are able to solve many different problems in a general-purpose fashion.
+Early achievements of the first commercially available programming language Fortran are still used
 today in the Modular Ocean Model~\cite{Adcroft2019,Griffies2012}.
 The development of the C programming language in 1972 enabled milestones such as the Unix operating
 system~ \cite{Ritchie1978} which layed the foundation for many major scientific achievements.
 With the advent of C++ in 1985 further contributions were made such as the root project which
-is a "Object Oriented Data-Analysis Framework"~\cite{Brun1997} used by the CERN
-project~\cite{https://doi.org/10.7483/opendata.atlas.l806.5cku}.
-In more recent years  deep learning tools such as pytorch~\cite{Ansel_PyTorch_2_Faster_2024},
-tensorflow~\cite{tensorflow2015-whitepaper} have seen widespread use which are programmed on a
-higher abstraction level using Python.
-The latter enabled the development of AlphaFold which is provides AI-based protein structure
-prediction~\cite{Jumper2021}.
+is an "Object Oriented Data-Analysis Framework"~\cite{Brun1997} and mainly used by
+CERN~\cite{https://doi.org/10.7483/opendata.atlas.l806.5cku}.
+They also build the backbone of all deep learning tools such as
+pytorch~\cite{Ansel_PyTorch_2_Faster_2024} and tensorflow~\cite{tensorflow2015-whitepaper} which
+have seen widespread use and are written on a higher abstraction level using Python.
+Tensorflow builds the foundation of AlphaFold~\cite{Jumper2021} which provides AI-based protein
+structure prediction and Pytorch enabled the development of new cell segmentation
+tools~\cite{Cutler2022}.
 
 % Importance of programming in science
 % \begin{enumerate}
@@ -147,29 +155,113 @@ prediction~\cite{Jumper2021}.
 %     \item
 % \end{enumerate}
 
-As the preceding examples show, even a single programming language can span across multiple
-abstraction levels, ranging from low-levels of operation to high-level ones.
-The former mostly deal with instructions on a level close to the actual hardware such as memory
-allocation, pointer arithmetic or by using assembly instructions directly.
+A single programming language can span across multiple abstraction levels, ranging from low-levels
+of operation to high-level ones.
+The former mostly deal with instructions close to the actual hardware such as memory allocation,
+pointer arithmetic or by using assembly instructions directly.
 Meanwhile, high-level operations usually combine many lower-level ones to perform a single task.
 An example for a high-level operation would be the addition of two matrices which might allocate the
 required memory, fill it according to the given values and then call the appropriate math function
 to pairwise add their entries.
 Languages which can operate effectively on a lower level often bear the most promise for maximum
-performance which is crucial in any scientific application.
-Of these languages almost all are compiled using an optimizing compiler which enables many of their
-performance achievements.
+performance which is crucial for most scientific applications.
+% Of these languages almost all are compiled using an optimizing compiler which enables many of their
+% performance achievements.
 
-This mini-review concerns itself with the Rust programming language and aims to provide an overview
-of the field of scientific computing with the Rust ecosystem.
-Other systems programming languages  such as C, C++ or Fortran have dominated the field over the
-past decades.
-Most notably, C++ has been influential in establishing a model of "zero cost abstractions" where a
-phrasing of the problem from a higher point of view does not involve any additional execution cost
-but is handled by the compiler.
-These and many other principles have allowed for a plethora of
+This review concerns itself with the Rust programming language and aims to provide an overview
+of the field of scientific computing within the Rust ecosystem.
+Rust supports multiple programming paradigms and offers built-in memory safety by employing an
+ownership model that enforces the validity of all references.
+As such it is able to cover a wide range of abstraction levels, comparable with C++ and offers
+comparable performance \textbf{CITATION}.
+It takes hard-learned lessons and offers solutions for many existing problems that other languages
+face.
+It has been the "most loved language" for the past 7 years according to data from the developer
+survey of \url{stackoverflow.com}.
+This data is shown in figure~\ref{fig:stackoverflow-popular-languages} where we compare it to other
+popular programming languages is compared against other languages.
+It also ranks high among the "most desired languages" which is displayed in
+figure~\ref{fig:stackoverflow-desired-languages}.
 
-Judging C/C++
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/stackoverflow-loved-language.pdf}%
+    \includegraphics[width=0.5\textwidth]{figures/stackoverflow-desired-language.pdf}
+    \caption{
+        Popularity of the Rust programming language.
+    }
+    \label{fig:stackoverflow-desired-languages}
+\end{figure}
+
+\subsection{Comparison of Rust with C and C++}
+Within the realm of scientific computing, C++ and C can be seen as the major competitors of Rust.
+As previously discussed, they have been instrumental in the achievement of many scientific
+milestones.
+They are widely applied and developers are generally readily available to tackle new projects.
+Thus, their importance to the foundational advances across all areas of computation should not be
+understated.
+However, as with any maturing technology, many issues have been identified which are intrinsic to
+the design of these languages.
+The C programming language manually manages the memory of the program which provides flexibility but
+leaves the task of correctly freeing resources to the user which can quickly become difficult to
+track.
+This ambiguity has led to many bugs and vulnerabilities.
+The chromium project has published data that indicates $\approx 70\%$ of all high-severity bugs to
+be related to memory unsafety~\cite{ChromiumMemorySafety}.
+These issues are important for all practical applications, especially at larger scales with
+multiple workstations, clusters or supercomputers where program crashes can lead to lost data and
+waisted resources.
+
+Introduce \ac{raii}
+
+\begin{table}
+    \centering
+    \begin{tabularx}{\textwidth}{X X X X}
+        % \toprule
+        Category & C & C++ & Rust\\
+        \midrule
+        Memory Safety & Dangling pointers, buffer overflows, manual memory management & Includes C,
+        mitigated by \ac{raii} \& smart pointers & Ownership model\\
+        \midrule
+        % Undefined Behavior & 
+        Error Handling & Return error codes & Return error codes \& Exceptions &
+        Errors are return types, \texttt{Result} and \texttt{Option} types enforce handling\\
+        \midrule
+        \makecell[l]{Concurrency \&\\ Parallelism} & Manual (\texttt{pthreads})
+        & Manual, risk data races &
+        Thread-safety through ownership model, enforced at compile-time\\
+        \midrule
+        Ecosystem & Extensive, fragmented & Vast, fragmented (CMake, Conan, vcpkg, ..) & Unified
+        package manager, registry, build system\\
+        % \bottomrule
+    \end{tabularx}
+\end{table}
+
+Since C++ provides backwards compatiblity
+
+C++ has been influential in establishing a model of "zero cost abstractions" where a phrasing of the
+problem from a higher point of view does not involve any additional execution cost but is handled by
+the compiler.
+
+\begin{enumerate}
+    \item Memory Safety Issues
+    \item Mutable by Default
+    \item Macros
+    \item Ecosystem Fragmentation
+    \item Concurrency and Parallelism
+    \item Error Handling
+\end{enumerate}
+
+C++
+\begin{enumerate}
+    \item Legacy and Backward Compatibility
+    \item Templates vs. Generics
+    \item Complexity of the Standard
+    \item Multiple Inheritance Complexity
+    \item Name Lookup and Scope Complexity
+    \item Undefined Behavior is Easier to Trigger
+\end{enumerate}
+
 \begin{enumerate}
     \item Previous Decades: C/C++ in science
     \item Limitations of design choices of language become evident
@@ -205,6 +297,7 @@ Elaborate on why Rust solves many problems
     \item very good C-interop; utilize existing software
 \end{enumerate}
 
+\subsection{Current Advancements of Rust}
 Show that many companies are starting to adopt Rust
 \begin{enumerate}
     \item Amazon (AWS)\\ AWS developed Firecracker, a microVM monitoring service powering
@@ -240,23 +333,18 @@ Show that many companies are starting to adopt Rust
     \item Linux Kernel\\ Only other supported language except from C
 \end{enumerate}
 
-\begin{figure*}
+\begin{figure}
     \centering
     \includegraphics[width=0.5\textwidth]{figures/stackoverflow-popular-languages.pdf}%
     \includegraphics[width=0.5\textwidth]{figures/pypi-org-used-languages.pdf}
     \caption{
         Usage of programming languages according to (A) stackoverflow.com and (B) pypi.org.
+        % For discussion: overlap between C and C++ is about 406 projects
+        % Other overlaps are negligible
     }
-\end{figure*}
-\begin{figure*}
-    \centering
-    \includegraphics[width=0.5\textwidth]{figures/stackoverflow-loved-language.pdf}%
-    \includegraphics[width=0.5\textwidth]{figures/stackoverflow-desired-language.pdf}
-    \caption{
-        Popularity of the Rust programming language.
-    }
-\end{figure*}
-\begin{figure*}
+    \label{fig:stackoverflow-popular-languages}
+\end{figure}
+\begin{figure}
     \centering
     \includegraphics[width=0.5\textwidth]{figures/crates-io-release-numbers.pdf}%
     \includegraphics[width=0.5\textwidth]{figures/crates-io-deps-downloads-scatter.pdf}
@@ -268,13 +356,14 @@ Show that many companies are starting to adopt Rust
         The colors and size of the markers are also scaled logarithmically with the number of total
         downloads.
     }
-\end{figure*}
+\end{figure}
 
 %###################################################################################################
 \section{Ecosystem and Libraries}
 
-\begin{table*}
+\begin{table}
     \centering
+    \rowcolors{2}{white}{lightgray!30}
     \begin{tabular}{l r r r r r}
         \toprule
         Crate Name &Last Update &Version &$N_d$ &$D_\text{week}$ &$D_\text{total}$\\
@@ -307,7 +396,7 @@ Show that many companies are starting to adopt Rust
         \bottomrule
     \end{tabular}
     \caption{TODO}
-\end{table*}
+\end{table}
 
 \subsection{Foundational Components}
 Definition:\\
@@ -418,7 +507,7 @@ Equations")
 \section{Conclusion}
 \label{section:conclusion}
 
-\onecolumn
+% \onecolumn
 \printbibliography
 
 %###################################################################################################
